@@ -85,5 +85,38 @@ namespace VisionApp
                 }
             }
         }
+
+        private void btnResize_Click(object sender, EventArgs e)
+        {
+            if (originalImg == null) return;
+
+            Mat resizedImg = new Mat();
+            // 원본 크기의 0.5배(가로, 세로)로 조절한다.
+            // InterpolationFlags.Linear는 크기를 조절할 때 화질을 부드럽게 보정하는 알고리즘이다.
+            Cv2.Resize(originalImg, resizedImg, new OpenCvSharp.Size(0, 0), 0.5, 0.5, InterpolationFlags.Linear);
+
+            // 결과 적용
+            originalImg = resizedImg;
+            pictureBox1.Image = BitmapConverter.ToBitmap(originalImg);
+        }
+
+        private void btnDraw_Click(object sender, EventArgs e)
+        {
+            if (originalImg == null) return;
+
+            // 1. 사각형 그리기 (이미지, 시작점, 끝점, 색상, 두께)
+            // Scalar는 (B, G, R) 순서이다. (255, 0, 0)은 파란색이다.
+            Cv2.Rectangle(originalImg, new OpenCvSharp.Point(50, 50), new OpenCvSharp.Point(200, 200), new Scalar(255, 0, 0), 3);
+
+            // 2. 원 그리기 (이미지, 중심점, 반지름, 색상, 두께)
+            Cv2.Circle(originalImg, new OpenCvSharp.Point(150, 150), 60, new Scalar(0, 255, 0), 3);
+
+            // 3. 글자 쓰기 (이미지, 내용, 위치, 글꼴, 크기, 색상, 두께)
+            Cv2.PutText(originalImg, "Hello C# Vision!", new OpenCvSharp.Point(50, 40),
+                HersheyFonts.HersheyComplex, 1.2, new Scalar(0, 0, 255), 2);
+
+            // 화면 업데이트
+            pictureBox1.Image = BitmapConverter.ToBitmap(originalImg);
+        }
     }
 }

@@ -33,6 +33,8 @@
             this.btnGray = new System.Windows.Forms.Button();
             this.btnFlip = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnResize = new System.Windows.Forms.Button();
+            this.btnDraw = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,7 +71,7 @@
             // 
             this.btnFlip.Location = new System.Drawing.Point(132, 336);
             this.btnFlip.Name = "btnFlip";
-            this.btnFlip.Size = new System.Drawing.Size(105, 34);
+            this.btnFlip.Size = new System.Drawing.Size(110, 34);
             this.btnFlip.TabIndex = 3;
             this.btnFlip.Text = "좌우 반전";
             this.btnFlip.UseVisualStyleBackColor = true;
@@ -85,11 +87,33 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // btnResize
+            // 
+            this.btnResize.Location = new System.Drawing.Point(12, 337);
+            this.btnResize.Name = "btnResize";
+            this.btnResize.Size = new System.Drawing.Size(114, 33);
+            this.btnResize.TabIndex = 5;
+            this.btnResize.Text = "50% 축소";
+            this.btnResize.UseVisualStyleBackColor = true;
+            this.btnResize.Click += new System.EventHandler(this.btnResize_Click);
+            // 
+            // btnDraw
+            // 
+            this.btnDraw.Location = new System.Drawing.Point(249, 337);
+            this.btnDraw.Name = "btnDraw";
+            this.btnDraw.Size = new System.Drawing.Size(107, 33);
+            this.btnDraw.TabIndex = 6;
+            this.btnDraw.Text = "그리기 테스트";
+            this.btnDraw.UseVisualStyleBackColor = true;
+            this.btnDraw.Click += new System.EventHandler(this.btnDraw_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(368, 380);
+            this.Controls.Add(this.btnDraw);
+            this.Controls.Add(this.btnResize);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnFlip);
             this.Controls.Add(this.btnGray);
@@ -109,6 +133,8 @@
         private System.Windows.Forms.Button btnGray;
         private System.Windows.Forms.Button btnFlip;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnResize;
+        private System.Windows.Forms.Button btnDraw;
     }
 }
 
