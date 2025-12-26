@@ -22,3 +22,4 @@ C:\Users\PC\Desktop\vision\VisionApp\VisionApp\obj\Debug\VisionApp.csproj.CoreCo
 C:\Users\PC\Desktop\vision\VisionApp\VisionApp\obj\Debug\VisionApp.csproj.Up2Date
 C:\Users\PC\Desktop\vision\VisionApp\VisionApp\obj\Debug\VisionApp.exe
 C:\Users\PC\Desktop\vision\VisionApp\VisionApp\obj\Debug\VisionApp.pdb
+C:\Users\PC\Desktop\vision\VisionApp\VisionApp\obj\Debug\VisionApp.exe.config
