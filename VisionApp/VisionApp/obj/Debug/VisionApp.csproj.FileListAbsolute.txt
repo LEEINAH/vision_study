@@ -23,3 +23,9 @@ C:\Users\PC\Desktop\vision\VisionApp\VisionApp\obj\Debug\VisionApp.csproj.Up2Dat
 C:\Users\PC\Desktop\vision\VisionApp\VisionApp\obj\Debug\VisionApp.exe
 C:\Users\PC\Desktop\vision\VisionApp\VisionApp\obj\Debug\VisionApp.pdb
 C:\Users\PC\Desktop\vision\VisionApp\VisionApp\obj\Debug\VisionApp.exe.config
+C:\Users\PC\Desktop\vision\VisionApp\VisionApp\bin\Debug\OpenCvSharp.Extensions.dll
+C:\Users\PC\Desktop\vision\VisionApp\VisionApp\bin\Debug\System.Drawing.Common.dll
+C:\Users\PC\Desktop\vision\VisionApp\VisionApp\bin\Debug\OpenCvSharp.Extensions.xml
+C:\Users\PC\Desktop\vision\VisionApp\VisionApp\bin\Debug\System.Drawing.Common.pdb
+C:\Users\PC\Desktop\vision\VisionApp\VisionApp\bin\Debug\System.Drawing.Common.xml
+C:\Users\PC\Desktop\vision\VisionApp\VisionApp\obj\Debug\VisionApp.Form1.resources
