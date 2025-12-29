@@ -1,0 +1,11 @@
+C:\Users\PC\Desktop\vision\ThreadAbort\ThreadAbort\bin\Debug\ThreadAbort.exe.config
+C:\Users\PC\Desktop\vision\ThreadAbort\ThreadAbort\bin\Debug\ThreadAbort.exe
+C:\Users\PC\Desktop\vision\ThreadAbort\ThreadAbort\bin\Debug\ThreadAbort.pdb
+C:\Users\PC\Desktop\vision\ThreadAbort\ThreadAbort\obj\Debug\ThreadAbort.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\vision\ThreadAbort\ThreadAbort\obj\Debug\ThreadAbort.Form1.resources
+C:\Users\PC\Desktop\vision\ThreadAbort\ThreadAbort\obj\Debug\ThreadAbort.Properties.Resources.resources
+C:\Users\PC\Desktop\vision\ThreadAbort\ThreadAbort\obj\Debug\ThreadAbort.csproj.GenerateResource.cache
+C:\Users\PC\Desktop\vision\ThreadAbort\ThreadAbort\obj\Debug\ThreadAbort.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\vision\ThreadAbort\ThreadAbort\obj\Debug\ThreadAbort.exe
+C:\Users\PC\Desktop\vision\ThreadAbort\ThreadAbort\obj\Debug\ThreadAbort.pdb
+C:\Users\PC\Desktop\vision\ThreadAbort\ThreadAbort\obj\Debug\ThreadAbort.exe.config
