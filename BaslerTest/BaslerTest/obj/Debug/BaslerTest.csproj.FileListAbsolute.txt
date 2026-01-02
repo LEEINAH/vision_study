@@ -1,0 +1,14 @@
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\bin\Debug\BaslerTest.exe.config
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\bin\Debug\BaslerTest.exe
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\bin\Debug\BaslerTest.pdb
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\bin\Debug\Basler.Pylon.dll
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\bin\Debug\Basler.Pylon.xml
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\obj\Debug\BaslerTest.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\obj\Debug\BaslerTest.Form1.resources
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\obj\Debug\BaslerTest.Properties.Resources.resources
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\obj\Debug\BaslerTest.csproj.GenerateResource.cache
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\obj\Debug\BaslerTest.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\obj\Debug\BaslerTest.csproj.Up2Date
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\obj\Debug\BaslerTest.exe
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\obj\Debug\BaslerTest.pdb
+C:\Users\PC\Desktop\vision\BaslerTest\BaslerTest\obj\Debug\BaslerTest.exe.config
