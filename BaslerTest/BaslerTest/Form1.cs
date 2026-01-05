@@ -9,7 +9,8 @@ namespace BaslerTest
 {
     public partial class Form1 : Form
     {
-        private Camera camera = null;
+        private Camera camera1 = null;
+        private Camera camera2 = null;
 
         public Form1()
         {
@@ -20,58 +21,113 @@ namespace BaslerTest
         {
             try
             {
-                // 첫 번째 사용 가능한 카메라 디바이스를 생성.
-                camera = new Camera();
-                MessageBox.Show("Using device: " + camera.CameraInfo[CameraInfoKey.ModelName]);
+                // 1. 연결된 모든 카메라 리스트 가져오기
+                List<ICameraInfo> allCameras = CameraFinder.Enumerate();
 
-                // 카메라를 연다.
-                camera.Open();
+                if (allCameras.Count < 2)
+                {
+                    MessageBox.Show("카메라가 2대 이상 연결되어야 합니다. 현재: " + allCameras.Count + "대");
+                    return;
+                }
 
-                // 이미지를 한 장만 가져오도록 설정한다 (One-shot grab).
-                // 연속 촬영 (Continuous shot)은 별도 설정이 필요하다.
-                camera.Parameters[PLCamera.AcquisitionMode].SetValue(PLCamera.AcquisitionMode.SingleFrame);
+                // 2. 각각의 객체 생성 및 오픈
+                camera1 = new Camera(allCameras[0]); // 첫 번째 카메라
+                camera2 = new Camera(allCameras[1]); // 두 번째 카메라
 
-                // 이미지 획득 시작.
-                camera.StreamGrabber.Start();
+                camera1.Open();
+                camera2.Open();
 
-                // 이미지 그랩 결과(grab result)를 가져옴.
-                IGrabResult grabResult = camera.StreamGrabber.RetrieveResult(5000, TimeoutHandling.ThrowException);
+                // 3. 각각 설정 (예: 노출 시간)
+                camera1.Parameters[PLCamera.ExposureTimeAbs].SetValue(5000);
+                camera2.Parameters[PLCamera.ExposureTimeAbs].SetValue(5000);
 
-                using (grabResult)
+                // 4. 각각 촬영 시작
+                camera1.StreamGrabber.Start();
+                camera2.StreamGrabber.Start();
+
+                // 5. 결과 가져오기 (각각 호출)
+                IGrabResult result1 = camera1.StreamGrabber.RetrieveResult(5000, TimeoutHandling.ThrowException);
+                IGrabResult result2 = camera2.StreamGrabber.RetrieveResult(5000, TimeoutHandling.ThrowException);
+
+                using (result1)
                 {
                     // 이미지 획득이 성공했는지 확인.
-                    if (grabResult.GrabSucceeded)
+                    if (result1.GrabSucceeded)
                     {
-                        // 그랩된 이미지를 Bitmap으로 변환하여 PictureBox에 표시.
-                        // 이 과정에서는 pylon의 이미지 포맷 변환 유틸리티를 사용하는 것이 좋다.
-                        Bitmap bitmap = new Bitmap(grabResult.Width, grabResult.Height, PixelFormat.Format32bppRgb);
-                        // 실제 구현에서는 Basler.Pylon.ImageFormatConverter 클래스를 사용하여 안전하게 변환해야 함.
+                        // Pylon의 이미지 변환기 생성
+                        PixelDataConverter converter = new PixelDataConverter();
 
-                        // PictureBox에 이미지 표시 (실제 구현 시 변환 코드 추가 필요)
-                        pictureBoxDisplay.Image = bitmap;
-                        MessageBox.Show("Image grabbed successfully!");
+                        // 윈도우 PictureBox에서 쓸 수 있는 비트맵 도화지 생성
+                        Bitmap bitmap = new Bitmap(result1.Width, result1.Height, PixelFormat.Format32bppRgb);
+
+                        // 비트맵의 메모리 영역을 잠시 고정 (데이터를 쓰기 위함)
+                        BitmapData bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+
+                        // 카메라 데이터를 윈도우용 컬러 포맷(BGRA8)으로 변환해서 복사
+                        converter.OutputPixelFormat = PixelType.BGRA8packed;
+                        IntPtr ptrBmp = bmpData.Scan0; // 도화지의 시작 주소
+                        converter.Convert(ptrBmp, bmpData.Stride * bitmap.Height, result1);
+
+                        // 메모리 고정 해제
+                        bitmap.UnlockBits(bmpData);
+
+                        // 드디어 화면에 표시!
+                        pictureBoxDisplay1.Image = bitmap;
                     }
-                    else
+                }
+                using (result2)
+                {
+                    // 이미지 획득이 성공했는지 확인.
+                    if (result2.GrabSucceeded)
                     {
-                        MessageBox.Show("Error grabbing image: " + grabResult.ErrorCode + " " + grabResult.ErrorDescription);
+                        // Pylon의 이미지 변환기 생성
+                        PixelDataConverter converter = new PixelDataConverter();
+
+                        // 윈도우 PictureBox에서 쓸 수 있는 비트맵 도화지 생성
+                        Bitmap bitmap = new Bitmap(result2.Width, result2.Height, PixelFormat.Format32bppRgb);
+
+                        // 비트맵의 메모리 영역을 잠시 고정 (데이터를 쓰기 위함)
+                        BitmapData bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
+
+                        // 카메라 데이터를 윈도우용 컬러 포맷(BGRA8)으로 변환해서 복사
+                        converter.OutputPixelFormat = PixelType.BGRA8packed;
+                        IntPtr ptrBmp = bmpData.Scan0; // 도화지의 시작 주소
+                        converter.Convert(ptrBmp, bmpData.Stride * bitmap.Height, result2);
+
+                        // 메모리 고정 해제
+                        bitmap.UnlockBits(bmpData);
+
+                        // 드디어 화면에 표시!
+                        pictureBoxDisplay2.Image = bitmap;
                     }
                 }
             }
+            // 코드 실행 중 오류(IP 미설정 등)가 발생하면 상세 내용을 출력한다.
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+            // 성공하든 실패하든 마지막에는 반드시 카메라 연결을 끄고 메모리를 정리한다.
             finally
             {
                 // 그랩 중지 및 카메라 닫기
-                if (camera != null)
+                if (camera1 != null)
                 {
-                    camera.StreamGrabber.Stop();
-                    camera.Close();
-                    camera.Dispose();
-                    camera = null;
+                    camera1.StreamGrabber.Stop(); // 스트림 중지
+                    camera1.Close();              // 카메라 닫기
+                    camera1.Dispose();            // 리소스 해제
+                    camera1 = null;               // 객체 초기화
+                }
+
+                // 그랩 중지 및 카메라 닫기
+                if (camera2 != null)
+                {
+                    camera2.StreamGrabber.Stop(); // 스트림 중지
+                    camera2.Close();              // 카메라 닫기
+                    camera2.Dispose();            // 리소스 해제
+                    camera2 = null;               // 객체 초기화
                 }
             }
         }
-    }
+    }    
 }

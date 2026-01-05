@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             this.btnConnectGrab = new System.Windows.Forms.Button();
-            this.pictureBoxDisplay = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisplay)).BeginInit();
+            this.pictureBoxDisplay1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxDisplay2 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisplay1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisplay2)).BeginInit();
             this.SuspendLayout();
             // 
             // btnConnectGrab
             // 
-            this.btnConnectGrab.Location = new System.Drawing.Point(107, 333);
+            this.btnConnectGrab.Location = new System.Drawing.Point(274, 333);
             this.btnConnectGrab.Name = "btnConnectGrab";
             this.btnConnectGrab.Size = new System.Drawing.Size(112, 35);
             this.btnConnectGrab.TabIndex = 0;
@@ -43,24 +45,34 @@
             this.btnConnectGrab.UseVisualStyleBackColor = true;
             this.btnConnectGrab.Click += new System.EventHandler(this.btnConnectGrab_Click);
             // 
-            // pictureBoxDisplay
+            // pictureBoxDisplay1
             // 
-            this.pictureBoxDisplay.Location = new System.Drawing.Point(26, 27);
-            this.pictureBoxDisplay.Name = "pictureBoxDisplay";
-            this.pictureBoxDisplay.Size = new System.Drawing.Size(282, 275);
-            this.pictureBoxDisplay.TabIndex = 1;
-            this.pictureBoxDisplay.TabStop = false;
+            this.pictureBoxDisplay1.Location = new System.Drawing.Point(26, 27);
+            this.pictureBoxDisplay1.Name = "pictureBoxDisplay1";
+            this.pictureBoxDisplay1.Size = new System.Drawing.Size(282, 275);
+            this.pictureBoxDisplay1.TabIndex = 1;
+            this.pictureBoxDisplay1.TabStop = false;
+            // 
+            // pictureBoxDisplay2
+            // 
+            this.pictureBoxDisplay2.Location = new System.Drawing.Point(340, 27);
+            this.pictureBoxDisplay2.Name = "pictureBoxDisplay2";
+            this.pictureBoxDisplay2.Size = new System.Drawing.Size(282, 275);
+            this.pictureBoxDisplay2.TabIndex = 2;
+            this.pictureBoxDisplay2.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 394);
-            this.Controls.Add(this.pictureBoxDisplay);
+            this.ClientSize = new System.Drawing.Size(646, 394);
+            this.Controls.Add(this.pictureBoxDisplay2);
+            this.Controls.Add(this.pictureBoxDisplay1);
             this.Controls.Add(this.btnConnectGrab);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisplay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisplay1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisplay2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -68,7 +80,8 @@
         #endregion
 
         private System.Windows.Forms.Button btnConnectGrab;
-        private System.Windows.Forms.PictureBox pictureBoxDisplay;
+        private System.Windows.Forms.PictureBox pictureBoxDisplay1;
+        private System.Windows.Forms.PictureBox pictureBoxDisplay2;
     }
 }
 
