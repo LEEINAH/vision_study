@@ -1,0 +1,13 @@
+C:\Users\PC\Desktop\vision\ChattingApp\ChattingApp\bin\Debug\ChattingApp.exe.config
+C:\Users\PC\Desktop\vision\ChattingApp\ChattingApp\bin\Debug\ChattingApp.exe
+C:\Users\PC\Desktop\vision\ChattingApp\ChattingApp\bin\Debug\ChattingApp.pdb
+C:\Users\PC\Desktop\vision\ChattingApp\ChattingApp\obj\Debug\ChattingApp.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\vision\ChattingApp\ChattingApp\obj\Debug\ChattingApp.Form1.resources
+C:\Users\PC\Desktop\vision\ChattingApp\ChattingApp\obj\Debug\ChattingApp.Properties.Resources.resources
+C:\Users\PC\Desktop\vision\ChattingApp\ChattingApp\obj\Debug\ChattingApp.csproj.GenerateResource.cache
+C:\Users\PC\Desktop\vision\ChattingApp\ChattingApp\obj\Debug\ChattingApp.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\vision\ChattingApp\ChattingApp\obj\Debug\ChattingApp.exe
+C:\Users\PC\Desktop\vision\ChattingApp\ChattingApp\obj\Debug\ChattingApp.pdb
+C:\Users\PC\Desktop\vision\ChattingApp\ChattingApp\obj\Debug\ChattingApp.exe.config
+C:\Users\PC\Desktop\vision\ChattingApp\ChattingApp\obj\Debug\ChattingApp.User1.resources
+C:\Users\PC\Desktop\vision\ChattingApp\ChattingApp\obj\Debug\ChattingApp.User2.resources
