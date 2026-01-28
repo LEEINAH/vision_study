@@ -1,0 +1,11 @@
+C:\Users\PC\Desktop\vision\RobotSignal\RobotSignal\bin\Debug\RobotSignal.exe.config
+C:\Users\PC\Desktop\vision\RobotSignal\RobotSignal\bin\Debug\RobotSignal.exe
+C:\Users\PC\Desktop\vision\RobotSignal\RobotSignal\bin\Debug\RobotSignal.pdb
+C:\Users\PC\Desktop\vision\RobotSignal\RobotSignal\obj\Debug\RobotSignal.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\vision\RobotSignal\RobotSignal\obj\Debug\RobotSignal.Form1.resources
+C:\Users\PC\Desktop\vision\RobotSignal\RobotSignal\obj\Debug\RobotSignal.Properties.Resources.resources
+C:\Users\PC\Desktop\vision\RobotSignal\RobotSignal\obj\Debug\RobotSignal.csproj.GenerateResource.cache
+C:\Users\PC\Desktop\vision\RobotSignal\RobotSignal\obj\Debug\RobotSignal.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\vision\RobotSignal\RobotSignal\obj\Debug\RobotSignal.exe
+C:\Users\PC\Desktop\vision\RobotSignal\RobotSignal\obj\Debug\RobotSignal.pdb
+C:\Users\PC\Desktop\vision\RobotSignal\RobotSignal\obj\Debug\RobotSignal.exe.config
