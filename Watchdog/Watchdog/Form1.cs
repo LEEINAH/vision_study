@@ -46,6 +46,13 @@ namespace Watchdog
 
                 StartWatchdog();
             }
+
+            string startupPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "Watchdog.lnk");
+            if (System.IO.File.Exists(startupPath))
+            {
+                btnStartup.BackColor = Color.SkyBlue;
+                btnStartup.Text = "Registered";
+            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -180,6 +187,70 @@ namespace Watchdog
             }
         }
 
+        // 감시 시작
+        private void StartWatchdog()
+        {
+            if (isMonitoring) return;
+
+            if (int.TryParse(tbInterval.Text, out int result))
+            {
+                this.checkInterval = result;
+            }
+
+            if (this.checkInterval <= 0) this.checkInterval = 5000;
+
+            isMonitoring = true;
+
+            // UI 업데이트 (버튼 색상 및 프로그레스 바 설정)
+            btnOn.BackColor = Color.LightGreen;
+            btnOn.FlatAppearance.BorderColor = Color.LightGreen;
+            btnOff.BackColor = Color.WhiteSmoke;
+            btnOff.FlatAppearance.BorderColor = Color.WhiteSmoke;
+
+            pbStatus.Maximum = 100;
+            pbStatus.Value = 0;
+            pbStatus.ForeColor = Color.FromArgb(98, 222, 133);
+
+            Task.Run(() =>
+            {
+                while (isMonitoring)
+                {
+                    Process[] processes = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(targetApp));
+                    if (processes.Length == 0)
+                    {
+                        try
+                        {
+                            // 감시 시작
+                            Process.Start(targetApp);
+
+                            // 로그 찍기
+                            WriteLog("▶  프로그램이 재시작 되었습니다.");
+                        }
+                        catch (Exception ex) { Console.WriteLine(ex.Message); }
+                    }
+
+                    int elapsed = 0;
+                    int step = 100; // 업데이트 간격 (0.1초마다 게이지 갱신)
+
+                    while (elapsed < this.checkInterval && isMonitoring)
+                    {
+                        Thread.Sleep(step);
+                        elapsed += step;
+
+                        int percent = (int)((double)elapsed / this.checkInterval * 100);
+
+                        // 100을 넘지 않게 방어 코드
+                        if (percent > 100) percent = 100;
+
+                        this.Invoke(new MethodInvoker(delegate {
+                            if (!this.IsDisposed) pbStatus.Value = percent;
+                        }));
+                    }
+                    Thread.Sleep(200);
+                }
+            });
+        }
+
         // 로그 작성
         private void WriteLog(string message, string detail = "")
         {
@@ -255,76 +326,15 @@ namespace Watchdog
 
                 shortcut.Save(); // 저장
 
+                btnStartup.BackColor = Color.SkyBlue;
+                btnStartup.Text = "Registered";
+
                 WriteLog($"▶  시작프로그램 등록 완료: {shortcutPath}");
             }
             catch (Exception ex)
             {
                 WriteLog($"▶  시작프로그램 등록 실패: {ex.Message}");
             }
-        }
-
-        // 감시 시작
-        private void StartWatchdog()
-        {
-            if (isMonitoring) return;
-
-            if (int.TryParse(tbInterval.Text, out int result))
-            {
-                this.checkInterval = result;
-            }
-
-            if (this.checkInterval <= 0) this.checkInterval = 5000;
-
-            isMonitoring = true;
-
-            // UI 업데이트 (버튼 색상 및 프로그레스 바 설정)
-            btnOn.BackColor = Color.LightGreen;
-            btnOn.FlatAppearance.BorderColor = Color.LightGreen;
-            btnOff.BackColor = Color.WhiteSmoke;
-            btnOff.FlatAppearance.BorderColor = Color.WhiteSmoke;
-
-            pbStatus.Maximum = 100;
-            pbStatus.Value = 0;
-            pbStatus.ForeColor = Color.FromArgb(98, 222, 133);
-
-            Task.Run(() =>
-            {
-                while (isMonitoring)
-                {
-                    Process[] processes = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(targetApp));
-                    if (processes.Length == 0)
-                    {
-                        try
-                        {
-                            // 감시 시작
-                            Process.Start(targetApp);
-
-                            // 로그 찍기
-                            WriteLog("▶  프로그램이 재시작 되었습니다.");
-                        }
-                        catch (Exception ex) { Console.WriteLine(ex.Message); }
-                    }
-
-                    int elapsed = 0;
-                    int step = 100; // 업데이트 간격 (0.1초마다 게이지 갱신)
-
-                    while (elapsed < this.checkInterval && isMonitoring)
-                    {
-                        Thread.Sleep(step);
-                        elapsed += step;
-
-                        int percent = (int)((double)elapsed / this.checkInterval * 100);
-
-                        // 100을 넘지 않게 방어 코드
-                        if (percent > 100) percent = 100;
-
-                        this.Invoke(new MethodInvoker(delegate {
-                            if (!this.IsDisposed) pbStatus.Value = percent;
-                        }));
-                    }
-                    Thread.Sleep(200);
-                }
-            });
         }
 
         //---------- 버튼 디자인 ---------- 

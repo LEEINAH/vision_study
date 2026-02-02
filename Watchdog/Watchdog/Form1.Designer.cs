@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lbLog = new System.Windows.Forms.ListBox();
             this.gbConfig = new System.Windows.Forms.GroupBox();
+            this.btnStartup = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.btnSaveInterval = new System.Windows.Forms.Button();
             this.cbPath = new System.Windows.Forms.ComboBox();
@@ -45,8 +47,6 @@
             this.btnOn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.niWatchdog = new System.Windows.Forms.NotifyIcon(this.components);
-            this.btnStartup = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.gbConfig.SuspendLayout();
             this.gbStatus.SuspendLayout();
             this.SuspendLayout();
@@ -80,6 +80,29 @@
             this.gbConfig.TabStop = false;
             this.gbConfig.Text = "Config";
             // 
+            // btnStartup
+            // 
+            this.btnStartup.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnStartup.FlatAppearance.BorderSize = 0;
+            this.btnStartup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStartup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.btnStartup.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.btnStartup.ImageIndex = 0;
+            this.btnStartup.ImageList = this.imageList1;
+            this.btnStartup.Location = new System.Drawing.Point(311, 111);
+            this.btnStartup.Name = "btnStartup";
+            this.btnStartup.Size = new System.Drawing.Size(100, 40);
+            this.btnStartup.TabIndex = 11;
+            this.btnStartup.Text = "Add Startup";
+            this.btnStartup.UseVisualStyleBackColor = false;
+            this.btnStartup.Click += new System.EventHandler(this.btnStartup_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "icons8-windows-8-48.png");
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -91,7 +114,7 @@
             // 
             // btnSaveInterval
             // 
-            this.btnSaveInterval.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnSaveInterval.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnSaveInterval.FlatAppearance.BorderSize = 0;
             this.btnSaveInterval.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnSaveInterval.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -184,7 +207,7 @@
             // 
             // btnOff
             // 
-            this.btnOff.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnOff.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnOff.FlatAppearance.BorderSize = 0;
             this.btnOff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOff.Font = new System.Drawing.Font("Leelawadee UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -202,7 +225,7 @@
             // 
             // btnOn
             // 
-            this.btnOn.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnOn.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnOn.FlatAppearance.BorderSize = 0;
             this.btnOn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOn.Font = new System.Drawing.Font("Leelawadee UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -235,29 +258,6 @@
             this.niWatchdog.Text = "Watchdog Running";
             this.niWatchdog.Visible = true;
             this.niWatchdog.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.niWatchdog_MouseDoubleClick);
-            // 
-            // btnStartup
-            // 
-            this.btnStartup.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.btnStartup.FlatAppearance.BorderSize = 0;
-            this.btnStartup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStartup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.btnStartup.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.btnStartup.ImageIndex = 0;
-            this.btnStartup.ImageList = this.imageList1;
-            this.btnStartup.Location = new System.Drawing.Point(311, 111);
-            this.btnStartup.Name = "btnStartup";
-            this.btnStartup.Size = new System.Drawing.Size(100, 40);
-            this.btnStartup.TabIndex = 11;
-            this.btnStartup.Text = "Add Startup";
-            this.btnStartup.UseVisualStyleBackColor = false;
-            this.btnStartup.Click += new System.EventHandler(this.btnStartup_Click);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "icons8-windows-8-48.png");
             // 
             // Form1
             // 

@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "E:\\Study\\vision\\Watchdog\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9F86AB5B-BD83-4347-8BCD-E18E52494910}|Watchdog\\Watchdog.csproj|E:\\Study\\vision\\Watchdog\\watchdog\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9F86AB5B-BD83-4347-8BCD-E18E52494910}|Watchdog\\Watchdog.csproj|e:\\study\\vision\\watchdog\\watchdog\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9F86AB5B-BD83-4347-8BCD-E18E52494910}|Watchdog\\Watchdog.csproj|solutionrelative:watchdog\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -28,7 +28,7 @@
               "RelativeDocumentMoniker": "Watchdog\\Form1.cs",
               "ToolTip": "E:\\Study\\vision\\Watchdog\\Watchdog\\Form1.cs",
               "RelativeToolTip": "Watchdog\\Form1.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAmwCIAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAxwAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-28T04:54:53.681Z",
               "EditorCaption": ""
@@ -42,8 +42,7 @@
               "ToolTip": "E:\\Study\\vision\\Watchdog\\Watchdog\\Form1.cs [\uB514\uC790\uC778]",
               "RelativeToolTip": "Watchdog\\Form1.cs [\uB514\uC790\uC778]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-28T03:54:34.142Z",
-              "EditorCaption": " [\uB514\uC790\uC778]"
+              "WhenOpened": "2026-01-28T03:54:34.142Z"
             }
           ]
         }
