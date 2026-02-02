@@ -1,0 +1,13 @@
+E:\Study\vision\Watchdog\Watchdog\bin\Release\Watchdog.exe.config
+E:\Study\vision\Watchdog\Watchdog\bin\Release\Watchdog.exe
+E:\Study\vision\Watchdog\Watchdog\bin\Release\Watchdog.pdb
+E:\Study\vision\Watchdog\Watchdog\obj\Release\Watchdog.csproj.AssemblyReference.cache
+E:\Study\vision\Watchdog\Watchdog\obj\Release\Watchdog.Form1.resources
+E:\Study\vision\Watchdog\Watchdog\obj\Release\Watchdog.Properties.Resources.resources
+E:\Study\vision\Watchdog\Watchdog\obj\Release\Watchdog.csproj.GenerateResource.cache
+E:\Study\vision\Watchdog\Watchdog\obj\Release\Watchdog.csproj.CoreCompileInputs.cache
+E:\Study\vision\Watchdog\Watchdog\obj\Release\Watchdog.exe
+E:\Study\vision\Watchdog\Watchdog\obj\Release\Watchdog.pdb
+E:\Study\vision\Watchdog\Watchdog\obj\Release\Watchdog.exe.config
+E:\Study\vision\Watchdog\Watchdog\obj\Release\Interop.IWshRuntimeLibrary.dll
+E:\Study\vision\Watchdog\Watchdog\obj\Release\Watchdog.csproj.ResolveComReference.cache

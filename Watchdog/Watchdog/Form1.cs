@@ -1,11 +1,13 @@
-﻿using System;
+﻿using IWshRuntimeLibrary;
+using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Watchdog
 {
@@ -13,7 +15,8 @@ namespace Watchdog
     {
         string targetApp;
         int checkInterval;
-        bool isMonitoring = false;
+        bool isMonitoring;
+        string path;
 
         public Form1()
         {
@@ -22,15 +25,26 @@ namespace Watchdog
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Rectangle rect = new Rectangle(1, 1, pbStatus.Width - 2, pbStatus.Height - 2);
-            pbStatus.Region = new Region(rect);
+            string savedPath = Properties.Settings.Default.LastPath;
 
-            string defaultPath = @"E:\Vision PG\DW_Sealer_Single\DW_Sealer_Single C 20260128 A\DW_Sealer_Single\bin\x64\Release\DW_Sealer_Single.exe";
-
-            if (File.Exists(defaultPath))
+            if (string.IsNullOrEmpty(savedPath))
             {
-                SetTargetApp(defaultPath);
-                return;
+                savedPath = @"C:\VISION\DW_RTI_E.exe";
+            }
+
+            this.path = savedPath;
+            cbPath.Text = this.path;
+
+            if (System.IO.File.Exists(this.path))
+            {
+                SetTargetApp(this.path);
+
+                if (int.TryParse(tbInterval.Text, out int result))
+                {
+                    this.checkInterval = result;
+                }
+
+                StartWatchdog();
             }
         }
 
@@ -107,57 +121,8 @@ namespace Watchdog
                 this.checkInterval = result;
             }
 
-            isMonitoring = true;
-
-            // 버튼 색 변경
-            btnOn.BackColor = Color.LightGreen;
-            btnOn.FlatAppearance.BorderColor = Color.LightGreen;
-            btnOff.BackColor = Color.WhiteSmoke;
-            btnOff.FlatAppearance.BorderColor = Color.WhiteSmoke;
-
-            // 프로그레스 바
-            pbStatus.Maximum = 100;
-            pbStatus.Value = 0;
-            pbStatus.ForeColor = Color.FromArgb(98, 222, 133);
-
-            Task.Run(() =>
-            {             
-                while (isMonitoring)
-                {
-                    Process[] processes = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(targetApp));
-                    if (processes.Length == 0)
-                    {
-                        try
-                        {
-                            // 감시 시작
-                            Process.Start(targetApp);
-
-                            // 로그 찍기
-                            WriteLog("▶  프로그램이 재시작 되었습니다.");
-                        }
-                        catch (Exception ex) { Console.WriteLine(ex.Message); }
-                    }
-
-                    int elapsed = 0;
-                    int step = 100; // 업데이트 간격 (0.1초마다 게이지 갱신)
-
-                    while (elapsed < this.checkInterval && isMonitoring)
-                    {
-                        Thread.Sleep(step);
-                        elapsed += step;
-                        
-                        int percent = (int)((double)elapsed / this.checkInterval * 100);
-
-                        // 100을 넘지 않게 방어 코드
-                        if (percent > 100) percent = 100;
-
-                        this.Invoke(new MethodInvoker(delegate {
-                            if (!this.IsDisposed) pbStatus.Value = percent;
-                        }));
-                    }
-                    Thread.Sleep(200);
-                }
-            });            
+            // 메서드 호출
+            StartWatchdog();
         }
 
         private void btnOff_Click(object sender, EventArgs e)
@@ -187,9 +152,14 @@ namespace Watchdog
         {
             cbPath.Text = filePath;
             this.targetApp = filePath;
+            this.path = filePath;
+
+            // 경로가 바뀔 때마다 하드디스크에 영구 저장
+            Properties.Settings.Default.LastPath = filePath;
+            Properties.Settings.Default.Save();
 
             // 화면엔 파일명만, 파일엔 전체 경로 저장
-            WriteLog($"▶ 경로가 설정되었습니다. [{Path.GetFileName(filePath)}]", filePath);
+            WriteLog($"▶  경로가 설정되었습니다. [{Path.GetFileName(filePath)}]", filePath);
         }
 
         // 감시 주기 변경
@@ -236,29 +206,126 @@ namespace Watchdog
         {
             try
             {
-                // 로그 파일 경로 설정
-                string folderPath = Path.Combine(Application.StartupPath, "Logs");
+                string myDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+                string folderPath = Path.Combine(myDocuments, "Watchdog", "Logs");
+
                 if (!Directory.Exists(folderPath))
                 {
-                    Directory.CreateDirectory(folderPath); // 폴더가 없으면 생성
+                    Directory.CreateDirectory(folderPath); // 폴더가 없으면 생성 (Watchdog 폴더부터 하위까지 한 번에 생성됨)
                 }
 
                 // 파일명 설정
                 string fileName = DateTime.Now.ToString("yyyy-MM-dd") + ".log";
                 string filePath = Path.Combine(folderPath, fileName);
 
-                // 로그 내용 구성 (시간 : 메시지)
+                // 로그 내용 구성
                 string logContent = $"{DateTime.Now:yyyy-MM-dd HH : mm : ss} : {message}{Environment.NewLine}";
 
                 // 파일에 이어쓰기
-                File.AppendAllText(filePath, logContent);
+                System.IO.File.AppendAllText(filePath, logContent);
             }
             catch (Exception ex)
             {
                 // 파일 쓰기 실패 시 콘솔에만 출력
                 Console.WriteLine("로그 저장 실패: " + ex.Message);
             }
-        }        
+        }
+
+        // 실행 프로그램 등록
+        private void btnStartup_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string currentExePath = Process.GetCurrentProcess().MainModule.FileName;
+
+                string startupFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+
+                // 생성할 바로가기 파일 경로 (확장자는 반드시 .lnk)
+                string shortcutPath = Path.Combine(startupFolderPath, "Watchdog.lnk");
+
+                // 바로가기 객체 생성 및 설정
+                WshShell shell = new WshShell();
+                IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutPath);
+
+                shortcut.TargetPath = currentExePath;                // 원본 파일 경로
+                shortcut.WorkingDirectory = Application.StartupPath; // 실행될 때의 작업 디렉토리
+                shortcut.Description = "Watchdog";
+                shortcut.IconLocation = currentExePath;             // 아이콘 설정 (본인 아이콘 사용)
+
+                shortcut.Save(); // 저장
+
+                WriteLog($"▶  시작프로그램 등록 완료: {shortcutPath}");
+            }
+            catch (Exception ex)
+            {
+                WriteLog($"▶  시작프로그램 등록 실패: {ex.Message}");
+            }
+        }
+
+        // 감시 시작
+        private void StartWatchdog()
+        {
+            if (isMonitoring) return;
+
+            if (int.TryParse(tbInterval.Text, out int result))
+            {
+                this.checkInterval = result;
+            }
+
+            if (this.checkInterval <= 0) this.checkInterval = 5000;
+
+            isMonitoring = true;
+
+            // UI 업데이트 (버튼 색상 및 프로그레스 바 설정)
+            btnOn.BackColor = Color.LightGreen;
+            btnOn.FlatAppearance.BorderColor = Color.LightGreen;
+            btnOff.BackColor = Color.WhiteSmoke;
+            btnOff.FlatAppearance.BorderColor = Color.WhiteSmoke;
+
+            pbStatus.Maximum = 100;
+            pbStatus.Value = 0;
+            pbStatus.ForeColor = Color.FromArgb(98, 222, 133);
+
+            Task.Run(() =>
+            {
+                while (isMonitoring)
+                {
+                    Process[] processes = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(targetApp));
+                    if (processes.Length == 0)
+                    {
+                        try
+                        {
+                            // 감시 시작
+                            Process.Start(targetApp);
+
+                            // 로그 찍기
+                            WriteLog("▶  프로그램이 재시작 되었습니다.");
+                        }
+                        catch (Exception ex) { Console.WriteLine(ex.Message); }
+                    }
+
+                    int elapsed = 0;
+                    int step = 100; // 업데이트 간격 (0.1초마다 게이지 갱신)
+
+                    while (elapsed < this.checkInterval && isMonitoring)
+                    {
+                        Thread.Sleep(step);
+                        elapsed += step;
+
+                        int percent = (int)((double)elapsed / this.checkInterval * 100);
+
+                        // 100을 넘지 않게 방어 코드
+                        if (percent > 100) percent = 100;
+
+                        this.Invoke(new MethodInvoker(delegate {
+                            if (!this.IsDisposed) pbStatus.Value = percent;
+                        }));
+                    }
+                    Thread.Sleep(200);
+                }
+            });
+        }
 
         //---------- 버튼 디자인 ---------- 
         private void btnOn_MouseEnter(object sender, EventArgs e)

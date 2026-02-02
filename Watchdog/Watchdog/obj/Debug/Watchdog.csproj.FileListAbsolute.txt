@@ -9,3 +9,5 @@ E:\Study\vision\Watchdog\Watchdog\obj\Debug\Watchdog.csproj.CoreCompileInputs.ca
 E:\Study\vision\Watchdog\Watchdog\obj\Debug\Watchdog.exe
 E:\Study\vision\Watchdog\Watchdog\obj\Debug\Watchdog.pdb
 E:\Study\vision\Watchdog\Watchdog\obj\Debug\Watchdog.exe.config
+E:\Study\vision\Watchdog\Watchdog\obj\Debug\Interop.IWshRuntimeLibrary.dll
+E:\Study\vision\Watchdog\Watchdog\obj\Debug\Watchdog.csproj.ResolveComReference.cache
