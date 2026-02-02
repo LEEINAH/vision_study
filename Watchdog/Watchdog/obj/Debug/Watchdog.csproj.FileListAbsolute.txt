@@ -1,0 +1,11 @@
+E:\Study\vision\Watchdog\Watchdog\bin\Debug\Watchdog.exe.config
+E:\Study\vision\Watchdog\Watchdog\bin\Debug\Watchdog.exe
+E:\Study\vision\Watchdog\Watchdog\bin\Debug\Watchdog.pdb
+E:\Study\vision\Watchdog\Watchdog\obj\Debug\Watchdog.csproj.AssemblyReference.cache
+E:\Study\vision\Watchdog\Watchdog\obj\Debug\Watchdog.Form1.resources
+E:\Study\vision\Watchdog\Watchdog\obj\Debug\Watchdog.Properties.Resources.resources
+E:\Study\vision\Watchdog\Watchdog\obj\Debug\Watchdog.csproj.GenerateResource.cache
+E:\Study\vision\Watchdog\Watchdog\obj\Debug\Watchdog.csproj.CoreCompileInputs.cache
+E:\Study\vision\Watchdog\Watchdog\obj\Debug\Watchdog.exe
+E:\Study\vision\Watchdog\Watchdog\obj\Debug\Watchdog.pdb
+E:\Study\vision\Watchdog\Watchdog\obj\Debug\Watchdog.exe.config
